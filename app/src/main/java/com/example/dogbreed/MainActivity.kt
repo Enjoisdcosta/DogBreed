@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ReportFragment.Companion.reportFragment
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import com.example.dogbreed.details.DogDetailFragment
 import com.example.dogbreed.databinding.ActivityMainBinding
 import com.example.dogbreed.databinding.FragmentDogListBinding
 
-// When ever I make a fragment it also make a shopping
-// it wont let me make .example.dogbreed
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     private val binding get() = _binding!!
 
-
+    private lateinit var navController: NavController
      fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,5 +31,9 @@ class MainActivity : AppCompatActivity() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_dog_list, container, false)
 
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        navController = findNavController(R.id.dogListFragment)
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }
